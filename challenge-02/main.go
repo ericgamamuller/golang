@@ -108,9 +108,9 @@ func menuPayment(index int) {
 loopPayment:
 	for {
 		fmt.Println("Selected Payment:")
-		fmt.Println("    PaymentId:", payments[index].PaymentId.PaymentId)
-		fmt.Println("    Status:", payments[index].PaymentId.Status)
-		fmt.Println("    ConfirmationStatus:", payments[index].PaymentId.ConfirmationStatus)
+		fmt.Println("    PaymentId:", payments[index].PaymentId)
+		fmt.Println("    Status:", payments[index].Status)
+		fmt.Println("    ConfirmationStatus:", payments[index].ConfirmationStatus)
 		fmt.Println()
 		fmt.Println("Please inform the operation you would like to execute:")
 		fmt.Println("  1 - Reverse Payment")
