@@ -323,7 +323,7 @@ func reverseVoid(index int, voidIndex int) {
 	fmt.Println("    ReturnMessage:", response.ReturnMessage)
 	fmt.Println()
 
-	if response.ReturnCode == 0 {
+	if response.ReturnCode == "0" {
 		payments[index].Status = response.Status
 		payments[index].ConfirmationStatus = response.ConfirmationStatus
 	}
