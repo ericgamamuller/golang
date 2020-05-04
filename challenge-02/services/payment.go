@@ -6,14 +6,23 @@ import (
 	"git/challenge-02/services/builders"
 )
 
-func Payment(amount int) contracts.PaymentResponse {
-	return clients.PaymentPost(builders.PaymentRequest(amount), GetToken())
+func Payment(amount int) (bool, contracts.PaymentResponse) {
+	response := clients.PaymentPost(builders.PaymentRequest(amount), GetToken())
+	success := (response.Payment.ReturnCode == "000")
+
+	return success, response
 }
 
-func PaymentReverse(paymentId string) contracts.PaymentReversalResponse {
-	return clients.PaymentReversalDelete(paymentId, builders.PaymentReversalRequest(), GetToken())
+func PaymentReverse(paymentId string) (bool, contracts.PaymentReversalResponse) {
+	response := clients.PaymentReversalDelete(paymentId, builders.PaymentReversalRequest(), GetToken())
+	success := (response.ReasonCode == 0)
+
+	return success, response
 }
 
-func PaymentConfirm(paymentId string) contracts.PaymentConfirmationResponse {
-	return clients.PaymentConfirmationPut(paymentId, builders.PaymentConfirmationRequest(), GetToken())
+func PaymentConfirm(paymentId string) (bool, contracts.PaymentConfirmationResponse) {
+	response := clients.PaymentConfirmationPut(paymentId, builders.PaymentConfirmationRequest(), GetToken())
+	success := (response.ReasonCode == 0)
+
+	return success, response
 }
