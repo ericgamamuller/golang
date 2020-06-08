@@ -3,8 +3,8 @@ package models
 import "git/challenge-03/db"
 
 type PaymentLink struct {
-	Id 					  string
-	ShortUrl 			  string
+	ID 					  string
+	ShortURL 			  string
 	Type 				  string
 	Name 				  string
 	Description 		  string
@@ -33,7 +33,7 @@ func (link *PaymentLink) InsertLink() {
 		panic(err.Error())
 	}
 
-	dbLinkInsert.Exec(link.Id, link.ShortUrl, link.Type, link.Name, link.Description, link.ShowDescription, link.Price, link.ExpirationDate, link.Weight, link.MaxInstallments, link.Quantity, link.SKU, link.SoftDescriptor, link.ShippingName, link.ShippingPrice, link.ShippingOriginZipCode, link.ShippingType, link.RecurrentInterval, link.RecurrentEndDate)
+	dbLinkInsert.Exec(link.ID, link.ShortURL, link.Type, link.Name, link.Description, link.ShowDescription, link.Price, link.ExpirationDate, link.Weight, link.MaxInstallments, link.Quantity, link.SKU, link.SoftDescriptor, link.ShippingName, link.ShippingPrice, link.ShippingOriginZipCode, link.ShippingType, link.RecurrentInterval, link.RecurrentEndDate)
 }
 
 func GetLinks() []PaymentLink {
@@ -49,7 +49,7 @@ func GetLinks() []PaymentLink {
 	links := []PaymentLink{}
 
 	for dbLinks.Next() {
-		err = dbLinks.Scan(&link.Id, &link.ShortUrl, &link.Type, &link.Name, &link.Description, &link.ShowDescription, &link.Price, &link.ExpirationDate, &link.Weight, &link.MaxInstallments, &link.Quantity, &link.SKU, &link.SoftDescriptor, &link.ShippingName, &link.ShippingPrice, &link.ShippingOriginZipCode, &link.ShippingType, &link.RecurrentInterval, &link.RecurrentEndDate)
+		err = dbLinks.Scan(&link.ID, &link.ShortURL, &link.Type, &link.Name, &link.Description, &link.ShowDescription, &link.Price, &link.ExpirationDate, &link.Weight, &link.MaxInstallments, &link.Quantity, &link.SKU, &link.SoftDescriptor, &link.ShippingName, &link.ShippingPrice, &link.ShippingOriginZipCode, &link.ShippingType, &link.RecurrentInterval, &link.RecurrentEndDate)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -72,7 +72,7 @@ func GetLink(id string) PaymentLink {
 	link := PaymentLink{}
 
 	for dbLinks.Next() {
-		err = dbLinks.Scan(&link.Id, &link.ShortUrl, &link.Type, &link.Name, &link.Description, &link.ShowDescription, &link.Price, &link.ExpirationDate, &link.Weight, &link.MaxInstallments, &link.Quantity, &link.SKU, &link.SoftDescriptor, &link.ShippingName, &link.ShippingPrice, &link.ShippingOriginZipCode, &link.ShippingType, &link.RecurrentInterval, &link.RecurrentEndDate)
+		err = dbLinks.Scan(&link.ID, &link.ShortURL, &link.Type, &link.Name, &link.Description, &link.ShowDescription, &link.Price, &link.ExpirationDate, &link.Weight, &link.MaxInstallments, &link.Quantity, &link.SKU, &link.SoftDescriptor, &link.ShippingName, &link.ShippingPrice, &link.ShippingOriginZipCode, &link.ShippingType, &link.RecurrentInterval, &link.RecurrentEndDate)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -90,7 +90,7 @@ func (link *PaymentLink) UpdateLink() {
 		panic(err.Error())
 	}
 
-	dbLinkUpdate.Exec(link.Id, link.ShortUrl, link.Type, link.Name, link.Description, link.ShowDescription, link.Price, link.ExpirationDate, link.Weight, link.MaxInstallments, link.Quantity, link.SKU, link.SoftDescriptor, link.ShippingName, link.ShippingPrice, link.ShippingOriginZipCode, link.ShippingType, link.RecurrentInterval, link.RecurrentEndDate)
+	dbLinkUpdate.Exec(link.ID, link.ShortURL, link.Type, link.Name, link.Description, link.ShowDescription, link.Price, link.ExpirationDate, link.Weight, link.MaxInstallments, link.Quantity, link.SKU, link.SoftDescriptor, link.ShippingName, link.ShippingPrice, link.ShippingOriginZipCode, link.ShippingType, link.RecurrentInterval, link.RecurrentEndDate)
 
 	return link
 }
@@ -104,5 +104,5 @@ func (link *PaymentLink) DeleteLink() {
 		panic(err.Error())
 	}
 
-	dbLinkUpdate.Exec(link.Id)
+	dbLinkUpdate.Exec(link.ID)
 }
