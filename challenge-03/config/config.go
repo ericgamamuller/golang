@@ -14,7 +14,7 @@ func Initialize() {
 	viper.AddConfigPath(path)
 	err := viper.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("Fatal Error while reading config.yaml: %s \n", err))
+		panic(fmt.Errorf("Fatal error while reading config.yaml: %s", err))
 	}
 }
 

@@ -12,7 +12,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Type</th>
-                            <th>Quantity</th>
+                            <th>Url</th>
                             <th>Price</th>
                         </tr>
                     </thead>
@@ -21,7 +21,7 @@
                         <tr>
                             <td>{{.Name}}</td>
                             <td>{{.Type}}</td>
-                            <td>{{.Quantity}}</td>
+                            <td>{{.ShortUrl}}</td>
                             <td>{{.Price}}</td>
                             <td><a href="/edit?id={{.ID}}" class="btn btn-info">Edit</a></td>
                             <td><button onclick="onDelete('{{.ID}}', '{{.Name}}')" class="btn btn-danger">Delete</button></td>

@@ -1,6 +1,7 @@
 package services
 
 import (
+	"strconv"
 	"time"
 
 	"git/challenge-03/clients"
@@ -16,9 +17,18 @@ func GetToken() contracts.AuthToken {
 			config.ReadString("Auth.ClientId"),
 			config.ReadString("Auth.ClientSecret")}
 
-		token = clients.TokenRequest(request)
+		status, token := clients.TokenRequest(request)
 
-		token.ExpiresAt = time.Now().Second() + token.ExpiresIn
+		if status != 201 {
+			panic("Authentication failed!")
+		}
+
+		expiresIn, err := strconv.Atoi(token.ExpiresIn)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		token.ExpiresAt = time.Now().Second() + expiresIn
 	}
 
 	return token
