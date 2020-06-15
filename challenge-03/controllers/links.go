@@ -34,6 +34,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 			panic(err.Error())
 		}
 		request.Price = tempPrice
+		request.Weight = 100
 		request.ExpirationDate = "2021-06-15"
 		tempQuantity, err := strconv.Atoi(r.FormValue("quantity"))
 		if err != nil {

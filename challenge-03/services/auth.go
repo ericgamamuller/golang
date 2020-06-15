@@ -17,7 +17,8 @@ func GetToken() contracts.AuthToken {
 			config.ReadString("Auth.ClientId"),
 			config.ReadString("Auth.ClientSecret")}
 
-		status, token := clients.TokenRequest(request)
+		var status int
+		status, token = clients.TokenRequest(request)
 
 		if status != 201 {
 			panic("Authentication failed!")

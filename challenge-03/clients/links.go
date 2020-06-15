@@ -25,5 +25,9 @@ func CreateLink(request contracts.CreateLinkRequest, token contracts.AuthToken) 
 		fmt.Println("Failed to create payment link! Error:", err)
 	}
 
+	if result.RawResponse.StatusCode != 201 {
+		fmt.Println("Response error for status", result.RawResponse.StatusCode, ":", result)
+	}
+
 	return result.RawResponse.StatusCode, response
 }
