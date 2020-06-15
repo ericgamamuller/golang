@@ -6,20 +6,12 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-5">Editando produto</h1>
-            <p class="lead">Insira os dados para atualizar ou editar</p>
+            <h1 class="display-5">Editing payment link</h1>
+            <p class="lead">Update data for each field to proceed</p>
         </div>
     </div>
     <form method="POST" action="update">
-        <input type="hidden" name="id" value="{{.Id}}">
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" class="form-control" value="{{.Name}}">
-                </div>
-            </div>
-        </div>
+        <input type="hidden" name="id" value="{{.ID}}">
         <div class="row">
             <div class="col-sm-8">
                 <div class="form-group">
@@ -31,12 +23,36 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input type="text" name="price" class="form-control" value="{{.Price}}">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control" value="{{.Name}}">
                 </div>
             </div>
         </div>
-        <button type="submit" value="salvar" class="btn btn-success">Create</button>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" class="form-control" value="{{.Description}}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" name="price" class="form-control" value="{{.Price}}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" class="form-control" value="{{.Quantity}}">
+                </div>
+            </div>
+        </div>
+        <button type="submit" value="update" class="btn btn-success">Update</button>
         <a class="btn btn-info" href="/">Back</a>
     </form>
 </body>

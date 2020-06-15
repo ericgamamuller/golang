@@ -68,3 +68,15 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	link.DeleteLink()
 	http.Redirect(w, r, "/", 301)
 }
+
+func Edit(w http.ResponseWriter, r *http.Request) {
+	linkId := r.URL.Query().Get("id")
+
+	link := models.GetLink(linkId)
+
+	templates.ExecuteTemplate(w, "LinksEdit", link)
+}
+
+func Update(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/", 301)
+}
