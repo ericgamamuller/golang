@@ -29,7 +29,7 @@ func GetToken() contracts.AuthToken {
 			panic(err.Error())
 		}
 
-		token.ExpiresAt = time.Now().Second() + expiresIn
+		token.ExpiresAt = time.Now().Second() + expiresIn - 30
 	}
 
 	return token

@@ -65,7 +65,12 @@ func Create(w http.ResponseWriter, r *http.Request) {
 func Delete(w http.ResponseWriter, r *http.Request) {
 	link := models.PaymentLink{}
 	link.ID = r.URL.Query().Get("id")
-	link.DeleteLink()
+
+	success := services.DeleteLink(link.ID)
+	if success {
+		link.DeleteLink()
+	}
+
 	http.Redirect(w, r, "/", 301)
 }
 
@@ -73,10 +78,54 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	linkId := r.URL.Query().Get("id")
 
 	link := models.GetLink(linkId)
+	if link.ID == linkId {
+		success, response := services.GetLink(link.ID)
 
-	templates.ExecuteTemplate(w, "LinksEdit", link)
+		if success {
+			templates.ExecuteTemplate(w, "LinksEdit", response)
+			return
+		}
+	}
+	http.Redirect(w, r, "/", 301)
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
+	request := contracts.CreateLinkRequest{}
+
+	linkId := r.FormValue("id")
+
+	request.Type = r.FormValue("type")
+	request.Name = r.FormValue("name")
+	request.Description = r.FormValue("description")
+	request.ShowDescription = true
+	tempPrice, err := strconv.Atoi(r.FormValue("price"))
+	if err != nil {
+		panic(err.Error())
+	}
+	request.Price = tempPrice
+	request.Weight = 100
+	request.ExpirationDate = "2021-06-15"
+	tempQuantity, err := strconv.Atoi(r.FormValue("quantity"))
+	if err != nil {
+		panic(err.Error())
+	}
+	request.Quantity = tempQuantity
+	request.SKU = "teste"
+
+	request.Shipping = contracts.Shipping{}
+	request.Shipping.Type = "WithoutShipping"
+
+	success, response := services.UpdateLink(linkId, request)
+
+	if success {
+		link := models.PaymentLink{
+			ID:       response.ID,
+			ShortURL: response.ShortURL,
+			Name:     response.Name,
+			Type:     response.Type,
+			Price:    response.Price,
+		}
+		link.UpdateLink()
+	}
 	http.Redirect(w, r, "/", 301)
 }
